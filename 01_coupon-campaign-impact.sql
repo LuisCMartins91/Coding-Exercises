@@ -235,4 +235,4 @@ ORDER  BY orderdatea DESC;
 -- Order volume has increased by 28% and sales have increased by 25%
 -- As mentioned in the intro, other databases were not considered in this analysis
 -- Seasonality was also not taken into account, as campaign data was compared with data from the period immediately before
--- A useful next step would be to cross the data from this analysis with Google Analytics data and analyze changes in website traffic, bounce rate and conversion rate for the same period to better influence the impact of the campaign on the increase in sales.
+-- A useful next step would be to cross the data from this analysis with Google Analytics data and analyze changes in website traffic, bounce rate and conversion rate for the same period to better understand the impact of the campaign on the increase in sales.
