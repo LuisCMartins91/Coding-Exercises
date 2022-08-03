@@ -23,10 +23,10 @@
 -- We calculate the average number of daily orders for both before and after the campaign was implemented and compare both values
 -- The following variables are needed:
 	-- 'ref' is the order number
-    -- 'orderdetailname' is the name of the item 
-    -- 'placedon' is the date when the order was made
-    -- 'channel' is the sales channel where the order was made
-    -- 'status id' is the status of the order
+    	-- 'orderdetailname' is the name of the item 
+    	-- 'placedon' is the date when the order was made
+    	-- 'channel' is the sales channel where the order was made
+    	-- 'status id' is the status of the order
 -- In the database, each record represents a unique item of a purchase, so an order with 3 unique products plus shipping and a discount coupon will be represented by 5 rows in the database.
 -- We're only interest for orders that contain products included in the campaign (we need to exclude Product B and Product C), that were placed on the US Store, and whose payment has been processed (we need to exclude declined, cancelled and drafted orders)
 
@@ -83,17 +83,17 @@ FROM  (SELECT placedon :: DATE    AS orderdatea,
 
 -- OBSERVATIONS: 
 	-- Before launching the campaign, there were on average 70 orders per day on the US store
-    -- After launching the campaign, there were on average 90 orders per day on the US store
-    -- The average number of orders per day increased by 20 (+28%) on the US store after launching the campaign      
+    	-- After launching the campaign, there were on average 90 orders per day on the US store
+    	-- The average number of orders per day increased by 20 (+28%) on the US store after launching the campaign      
 
 -- Next, we want to analyze the evolution of orders, namely the percentage of the total orders where a campaign coupon discount code was used         
 -- The next query returns a table with the number of orders with and without discount coupons, split by day, from June 1st until the day before the present day
 -- It would then be turned into a bar chart directly on Metabase for a better visualization and understanding
 -- New variables are created:
 	-- 'orders_no_coupon' are orders where no coupon was used
-    -- 'orders_nm_coupons' are orders where a campaign coupon code was used 
-    -- 'orders_oth_coupons' are orders where other coupon codes were used
-    -- 'orders_total' are the total number of orders (this metric wasn't visualized for the bar chart, it's mostly to help us calculate the values for the 'orders_no_coupon' variable)
+    	-- 'orders_nm_coupons' are orders where a campaign coupon code was used 
+    	-- 'orders_oth_coupons' are orders where other coupon codes were used
+    	-- 'orders_total' are the total number of orders (this metric wasn't visualized for the bar chart, it's mostly to help us calculate the values for the 'orders_no_coupon' variable)
 SELECT placedon :: DATE                                          AS orderdatea,
        Count(DISTINCT ref)                                       AS orders_total,
        Coalesce(orders_1, 0)                                     AS orders_nm_coupons,
@@ -141,7 +141,7 @@ ORDER  BY orderdatea DESC
 -- We calculate the average daily net sales for both before and after the campaign was implemented and compare both values
 -- The following new variables are needed:
 	-- 'orderdetailnet' is the net sales of an item in a sale in the store's base currency
-    -- 'currencyexchangerate' is the rate between the store's base curreny and USD
+    	-- 'currencyexchangerate' is the rate between the store's base curreny and USD
 -- Note: Sales values are presented in USD. Because we are only analyzing the US store where the base currency is USD, the currency conversion calculation is not necessary as 'currencyexchangerate' = 1 and we could have simply used the 'orderdetailnet' metric. By including the conversion calculation, we ensure the following queries can be used for querying data from other web stores in the future.
 -- We also don't want to consider shipping costs for this
 
@@ -204,8 +204,8 @@ FROM   (SELECT placedon :: DATE                           AS orderdatea,
 
 -- OBSERVATIONS: 
 	-- Before launching the campaign, net sales was on average USD 6,000 per day on the US store
-    -- After launching the campaign, net sales was on average USD 7,500 per day on the US store
-    -- The average net sales per day increased by USD 1,500 (+25%) on the US store after launching the campaign   
+    	-- After launching the campaign, net sales was on average USD 7,500 per day on the US store
+    	-- The average net sales per day increased by USD 1,500 (+25%) on the US store after launching the campaign   
 
 -- Similarly to what was done on part 1, we want a visual representation of how daily net sales have evolved after launching the campaign
 -- The next query returns a table with two columns: date and net sales, from June 1st until the day before the present day
